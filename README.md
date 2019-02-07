@@ -1,1 +1,1 @@
-# carbon-proect-app
+# carbon-project-app
