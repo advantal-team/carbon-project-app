@@ -21,7 +21,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableJpaRepositories(basePackages = "com.advantal.repositories", entityManagerFactoryRef = "entityManagerFactory", transactionManagerRef = "transactionManager")
-@EnableTransactionManagement
+@EnableTransactionManagement 
 @PropertySource({ "classpath:application.properties" })
 public class JpaConfiguration {
 //	private static final Logger logger = Logger.getLogger(JpaConfiguration.class);
