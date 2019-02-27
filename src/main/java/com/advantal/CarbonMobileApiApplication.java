@@ -8,6 +8,6 @@ public class CarbonMobileApiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CarbonMobileApiApplication.class, args);
-	}
+	} 
  
 }
