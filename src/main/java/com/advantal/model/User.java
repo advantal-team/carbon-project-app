@@ -96,7 +96,7 @@ public class User {
 
 	
 
-	public String getOtp() {
+   public String getOtp() {
 		return otp;
 	}
 
