@@ -22,45 +22,53 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="user_id")
-	
+	@Column(name = "user_id")
+
 	private Integer userId;
-	
-	@Column(name="user_name")
-	
+
+	@Column(name = "user_name")
+
 	private String userName;
-	
-	@Column(name="mobile_no")
-	
+
+	@Column(name = "mobile_no")
+
 	private Integer mobileNo;
-	
-	@Column(name="password_1")
-	
+
+	@Column(name = "otp")
+
+	private String otp;
+
+	@Column(name = "password_1")
+
 	private String password1;
-	
-	@Column(name="password_2")
-	
+
+	@Column(name = "password_2")
+
 	private String password2;
-	
-	@Column(name="user_role")
-	
+
+	@Column(name = "user_role")
+
 	private String userRole;
-	
+
 	@CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-	@Column(name="added_date")
-	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "added_date")
+
 	private Date addedDate;
-	
+
 	@UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-	@Column(name="update_date")
-	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "update_date")
+
 	private Date updateDate;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "module_id", nullable = false)
-    private Module module;
+	@JoinColumn(name = "module_id", nullable = false)
+	private Module module;
+	
+	@Column(name = "status")
+
+	private Integer status;
 
 	public Integer getUserId() {
 		return userId;
@@ -84,6 +92,16 @@ public class User {
 
 	public void setMobileNo(Integer mobileNo) {
 		this.mobileNo = mobileNo;
+	}
+
+	
+
+	public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
 	}
 
 	public String getPassword1() {
@@ -133,7 +151,14 @@ public class User {
 	public void setModule(Module module) {
 		this.module = module;
 	}
-	
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 	
 	
 }

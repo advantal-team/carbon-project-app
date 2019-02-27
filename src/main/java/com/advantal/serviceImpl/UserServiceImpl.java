@@ -9,6 +9,7 @@ import com.advantal.model.User;
 import com.advantal.repositories.UserRepository;
 import com.advantal.service.UserService;
 import com.advantal.util.DesEncrypter;
+import com.advantal.util.RandomStringGenerator;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -18,18 +19,20 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User saveuserDetail(User user) {
-		
 		if(user.getUserId()==null) {
 			user.setAddedDate(new Date());
-			user.setPassword1(DesEncrypter.encrypt(user.getPassword1()));
-			user.setPassword2(DesEncrypter.encrypt(user.getPassword2()));
+			String otp = RandomStringGenerator.getRandomNumberString(6);
+			user.setOtp(otp);
+			user.setStatus(1);
 			user=userRepository.save(user);
 		}
 		else {
-			user.setUpdateDate(new Date());
-			user=userRepository.save(user);
+			if(user.getPassword1()!=null && user.getPassword2()!=null && !user.getPassword1().equals("") && !user.getPassword2().equals("")) {
+				user.setPassword1(DesEncrypter.encrypt(user.getPassword1()));
+				user.setPassword2(DesEncrypter.encrypt(user.getPassword2()));
+				user.setStatus(2);
+			}
 		}
-		
 		return user;
 	}
 
