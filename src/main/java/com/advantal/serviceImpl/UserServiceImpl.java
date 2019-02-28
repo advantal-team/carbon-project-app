@@ -1,7 +1,6 @@
 package com.advantal.serviceImpl;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User saveuserDetail(User user) {
-		User userList=userRepository.findByMobileNo(user.getMobileNo());
-		if (userList == null) {
+
+//		List<User>userList=userRepository.findByMobile(Integer.parseInt(user.getMobileNo()));
+		User users=userRepository.findByMobile(user.getMobileNo());
+		if (users==null) {
 			user.setAddedDate(new Date());
 			String otp = RandomStringGenerator.getRandomNumberString(6);
 			user.setOtp(otp);
@@ -31,9 +32,7 @@ public class UserServiceImpl implements UserService {
 		} else {
 			if (user.getPassword1() != null && user.getPassword2() != null && !user.getPassword1().equals("")
 					&& !user.getPassword2().equals("")) {
-
 				//User users = userRepository.findByMobileNo(user.getMobileNo()).get(0);
-				User users = userRepository.findByMobileNo(user.getMobileNo());
 				users.setPassword1(DesEncrypter.encrypt(user.getPassword1()));
 				users.setPassword2(DesEncrypter.encrypt(user.getPassword2()));
 				users.setQuickPassword(DesEncrypter.encrypt(user.getQuickPassword()));
@@ -45,7 +44,6 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 	}
-
 	@Override
 	public User findById(Long id) {
 		Optional<User> user = userRepository.findById(id);
@@ -55,10 +53,9 @@ public class UserServiceImpl implements UserService {
 		}
 		return user.get();
 	}
-
 	@Override
 	public Boolean verifyUser(User user) {
-		User users = userRepository.findByMobileNo(user.getMobileNo());
+		User users = userRepository.findByMobile(user.getMobileNo());
 		if (users != null && user != null) {
 			if (user.getOtp().equals(users.getOtp())) 
 				users.setStatus(IConstant.OTP_VERIFIED);
@@ -69,6 +66,19 @@ public class UserServiceImpl implements UserService {
 				return false;
 			}
 		}
-	
 
+	@SuppressWarnings("unused")
+	@Override
+	public Boolean resendOtp(User user) {
+		User users = userRepository.findByMobile(user.getMobileNo());
+		if(users!=null) {
+			String otp = RandomStringGenerator.getRandomNumberString(6);
+			users.setOtp(otp);
+			users=userRepository.save(users);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

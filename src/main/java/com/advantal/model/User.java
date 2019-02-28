@@ -1,5 +1,6 @@
 package com.advantal.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,11 +19,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="USER")
-//@NamedQueries({
-//    @NamedQuery(name = "User.findBymobileNo", query = "SELECT g FROM User g WHERE g.mobileNo = :mobileNo"),
-//   })
-public class User {
+@Table(name = "USER")
+public class User implements Serializable{
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
@@ -45,7 +42,7 @@ public class User {
 	@Column(name = "password_2")
 
 	private String password2;
-	
+
 	@Column(name = "quick_password")
 
 	private String quickPassword;
@@ -69,10 +66,11 @@ public class User {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "module_id", nullable = false)
 	private Module module;
-	
+
 	@Column(name = "status")
 
 	private Integer status;
+
 
 	public Long getUserId() {
 		return userId;
@@ -82,7 +80,6 @@ public class User {
 		this.userId = userId;
 	}
 
-
 	public String getMobileNo() {
 		return mobileNo;
 	}
@@ -91,9 +88,7 @@ public class User {
 		this.mobileNo = mobileNo;
 	}
 
-	
-
-   public String getOtp() {
+	public String getOtp() {
 		return otp;
 	}
 
@@ -164,8 +159,5 @@ public class User {
 	public void setQuickPassword(String quickPassword) {
 		this.quickPassword = quickPassword;
 	}
-	
-	
-	
+
 }
-	

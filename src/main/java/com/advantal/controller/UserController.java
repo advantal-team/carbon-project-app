@@ -40,7 +40,7 @@ public class UserController {
         Map<Object, Object> map = new HashMap();
         if(user!=null && user.getStatus()!=null && user.getStatus()==1) {
         	map.put(IConstant.RESPONSE,  HttpStatus.OK);
-			map.put(IConstant.MESSAGE, IConstant.VERIFICATION_SENT_FROM_USER);
+			map.put(IConstant.MESSAGE, IConstant.VERIFICATION_CODE_SENT);
         }
         else if(user!=null && user.getStatus()!=null && user.getStatus()==2){
         	map.put(IConstant.RESPONSE,  HttpStatus.CREATED);
@@ -66,7 +66,7 @@ public class UserController {
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
 	    public ResponseEntity<?> getUser(@PathVariable("id") Long id) {
 	        User user = userService.findById(id);
-	        User usrmob = userRepository.findByMobileNo("4444444");
+	        User usrmob = userRepository.findByMobile("4444444");
 	        System.out.println("===="+usrmob.getMobileNo()+"=========="+usrmob.getStatus());
 	        if(user == null) {
 	        	return new ResponseEntity(new CustomErrorType("User with id " + id + " not found"), HttpStatus.NOT_FOUND);
@@ -91,7 +91,11 @@ public class UserController {
 	    response.put("deleted", Boolean.TRUE);
 	    return response;
 	  }
-	
+	/**
+	 * @param user
+	 * @param ucBuilder
+	 * @return
+	 */
 	@RequestMapping(value="/verify_otp", method = RequestMethod.PUT)
     public  Map<Object, Object> verifyUser(@RequestBody User user, UriComponentsBuilder ucBuilder){
 		boolean status=userService.verifyUser(user);
@@ -105,8 +109,50 @@ public class UserController {
 			map.put(IConstant.MESSAGE, IConstant.VERIFICATION_ERROR_MESSAGE);
 		}
 		return map;
+        
     }
 	
+	/**
+	 * @param user
+	 * @param ucBuilder
+	 * @return
+	 */
+	@RequestMapping(value="/resend_otp", method = RequestMethod.POST)
+    public  Map<Object, Object> resendOtp(@RequestBody User user, UriComponentsBuilder ucBuilder){
+		boolean status=userService.resendOtp(user);
+		Map<Object, Object> map = new HashMap();
+		if(status) {
+			map.put(IConstant.RESPONSE,  HttpStatus.OK);
+			map.put(IConstant.MESSAGE, IConstant.VERIFICATION_RE_SENT);
+		}
+		else {
+			map.put(IConstant.RESPONSE,  HttpStatus.NOT_FOUND);
+			map.put(IConstant.MESSAGE, IConstant.INVALID_MOBILE_ERROR_MESSAGE);
+		}
+		return map;
+        
+    }
+	
+	/**
+	 * @param user
+	 * @param ucBuilder
+	 * @return
+	 */
+	@RequestMapping(value="/validate_mobile", method = RequestMethod.POST)
+    public  Map<Object, Object> mobileNoExistOrNot(@RequestBody User user, UriComponentsBuilder ucBuilder){
+		boolean status=userService.resendOtp(user);
+		Map<Object, Object> map = new HashMap();
+		if(status) {
+			map.put(IConstant.RESPONSE,  IConstant.ALREADY_REPORTED);
+			map.put(IConstant.MESSAGE, user.getMobileNo()+":"+IConstant.MOBILE_NO_ALREADY_REGISTER);
+		}
+		else {
+			map.put(IConstant.RESPONSE,  HttpStatus.ACCEPTED);
+			map.put(IConstant.MESSAGE, IConstant.INVALID_MOBILE_ERROR_MESSAGE);
+		}
+		return map;
+        
+    }
 }
 
 
