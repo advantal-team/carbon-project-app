@@ -1,5 +1,6 @@
 package com.advantal.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,21 +19,18 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="USER")
-public class User {
+@Table(name = "USER")
+public class User implements Serializable{
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 
-	private Integer userId;
-
-	@Column(name = "user_name")
-
-	private String userName;
+	private Long userId;
 
 	@Column(name = "mobile_no")
 
-	private Integer mobileNo;
+	private String mobileNo;
 
 	@Column(name = "otp")
 
@@ -45,6 +43,10 @@ public class User {
 	@Column(name = "password_2")
 
 	private String password2;
+
+	@Column(name = "quick_password")
+
+	private String quickPassword;
 
 	@Column(name = "user_role")
 
@@ -65,38 +67,20 @@ public class User {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "module_id", nullable = false)
 	private Module module;
-	
+
 	@Column(name = "status")
 
 	private Integer status;
 
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public Integer getMobileNo() {
+	public String getMobileNo() {
 		return mobileNo;
 	}
 
-	public void setMobileNo(Integer mobileNo) {
+	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
 
-	
-
-   public String getOtp() {
+	public String getOtp() {
 		return otp;
 	}
 
@@ -159,7 +143,13 @@ public class User {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
-	
+
+	public String getQuickPassword() {
+		return quickPassword;
+	}
+
+	public void setQuickPassword(String quickPassword) {
+		this.quickPassword = quickPassword;
+	}
+
 }
-	
