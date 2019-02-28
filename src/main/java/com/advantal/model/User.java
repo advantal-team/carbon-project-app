@@ -28,54 +28,43 @@ public class User implements Serializable{
 	private Long userId;
 
 	@Column(name = "mobile_no")
-
 	private String mobileNo;
 
 	@Column(name = "otp")
-
 	private String otp;
 
 	@Column(name = "password_1")
-
 	private String password1;
 
 	@Column(name = "password_2")
-
 	private String password2;
 
 	@Column(name = "quick_password")
-
 	private String quickPassword;
 
 	@Column(name = "user_role")
-
 	private String userRole;
 
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "added_date")
-
 	private Date addedDate;
 
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "update_date")
-
 	private Date updateDate;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "module_id", nullable = false)
 	private Module module;
-
 	@Column(name = "status")
-
 	private Integer status;
 
 
 	public Long getUserId() {
 		return userId;
 	}
-
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
@@ -83,7 +72,6 @@ public class User implements Serializable{
 	public String getMobileNo() {
 		return mobileNo;
 	}
-
 	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
@@ -91,7 +79,6 @@ public class User implements Serializable{
 	public String getOtp() {
 		return otp;
 	}
-
 	public void setOtp(String otp) {
 		this.otp = otp;
 	}
@@ -99,7 +86,6 @@ public class User implements Serializable{
 	public String getPassword1() {
 		return password1;
 	}
-
 	public void setPassword1(String password1) {
 		this.password1 = password1;
 	}
@@ -107,7 +93,6 @@ public class User implements Serializable{
 	public String getPassword2() {
 		return password2;
 	}
-
 	public void setPassword2(String password2) {
 		this.password2 = password2;
 	}
@@ -115,7 +100,6 @@ public class User implements Serializable{
 	public String getUserRole() {
 		return userRole;
 	}
-
 	public void setUserRole(String userRole) {
 		this.userRole = userRole;
 	}
@@ -123,7 +107,6 @@ public class User implements Serializable{
 	public Date getAddedDate() {
 		return addedDate;
 	}
-
 	public void setAddedDate(Date addedDate) {
 		this.addedDate = addedDate;
 	}
@@ -131,7 +114,6 @@ public class User implements Serializable{
 	public Date getUpdateDate() {
 		return updateDate;
 	}
-
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
@@ -139,7 +121,6 @@ public class User implements Serializable{
 	public Module getModule() {
 		return module;
 	}
-
 	public void setModule(Module module) {
 		this.module = module;
 	}
@@ -147,7 +128,6 @@ public class User implements Serializable{
 	public Integer getStatus() {
 		return status;
 	}
-
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
@@ -155,9 +135,7 @@ public class User implements Serializable{
 	public String getQuickPassword() {
 		return quickPassword;
 	}
-
 	public void setQuickPassword(String quickPassword) {
 		this.quickPassword = quickPassword;
 	}
-
 }

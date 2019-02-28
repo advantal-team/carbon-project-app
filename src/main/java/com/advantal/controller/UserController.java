@@ -66,8 +66,6 @@ public class UserController {
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
 	    public ResponseEntity<?> getUser(@PathVariable("id") Long id) {
 	        User user = userService.findById(id);
-	        User usrmob = userRepository.findByMobile("4444444");
-	        System.out.println("===="+usrmob.getMobileNo()+"=========="+usrmob.getStatus());
 	        if(user == null) {
 	        	return new ResponseEntity(new CustomErrorType("User with id " + id + " not found"), HttpStatus.NOT_FOUND);
 	        }
@@ -111,7 +109,6 @@ public class UserController {
 		return map;
         
     }
-	
 	/**
 	 * @param user
 	 * @param ucBuilder
@@ -130,9 +127,7 @@ public class UserController {
 			map.put(IConstant.MESSAGE, IConstant.INVALID_MOBILE_ERROR_MESSAGE);
 		}
 		return map;
-        
     }
-	
 	/**
 	 * @param user
 	 * @param ucBuilder
@@ -151,8 +146,5 @@ public class UserController {
 			map.put(IConstant.MESSAGE, IConstant.INVALID_MOBILE_ERROR_MESSAGE);
 		}
 		return map;
-        
     }
 }
-
-

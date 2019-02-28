@@ -15,18 +15,15 @@ public class Module {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	@Column(name="module_id")
-	
 	private Integer moduleId;
 	
 	@Column(name="module_name", nullable = false)
-	
 	private String moduleName;
 	
 
 	public Integer getModuleId() {
 		return moduleId;
 	}
-
 	public void setModuleId(Integer moduleId) {
 		this.moduleId = moduleId;
 	}
@@ -34,11 +31,7 @@ public class Module {
 	public String getModuleName() {
 		return moduleName;
 	}
-
 	public void setModuleName(String moduleName) {
 		this.moduleName = moduleName;
 	}
-
-	
-	
 }

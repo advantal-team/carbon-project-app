@@ -20,8 +20,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User saveuserDetail(User user) {
-
-//		List<User>userList=userRepository.findByMobile(Integer.parseInt(user.getMobileNo()));
+        // List<User>userList=userRepository.findByMobile(Integer.parseInt(user.getMobileNo()));
 		User users=userRepository.findByMobile(user.getMobileNo());
 		if (users==null) {
 			user.setAddedDate(new Date());
@@ -65,8 +64,7 @@ public class UserServiceImpl implements UserService {
 			} else {
 				return false;
 			}
-		}
-
+	}
 	@SuppressWarnings("unused")
 	@Override
 	public Boolean resendOtp(User user) {
